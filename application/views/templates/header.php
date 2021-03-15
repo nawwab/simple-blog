@@ -11,7 +11,19 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
-	<title><?php echo $view_title; ?></title>
+	<!-- font awesome -->
+	<script src="https://kit.fontawesome.com/33f8bea938.js" crossorigin="anonymous"></script>
+
+	<!-- from favicon generator -->
+	<link rel="apple-touch-icon" sizes="180x180" href="<?= base_url() ?>/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="<?= base_url() ?>/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="<?= base_url() ?>/favicon-16x16.png">
+	<link rel="manifest" href="<?= base_url() ?>/site.webmanifest">
+	<link rel="mask-icon" href="<?= base_url() ?>/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+
+	<title><?= $view_title; ?></title>
 	<style>
 		body {
 			font-family: 'Roboto', sans-serif;

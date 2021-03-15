@@ -21,22 +21,25 @@ class Blog_model extends CI_Model
 	{
 		$this->load->helper('url');
 		$slug = url_title($this->input->post('title'), 'dash', TRUE);
-		$same_slug = $this->db->select('slug')
-			->where('slug', $slug)
-			->count_all_results('blog');
-		$makan = array('makan' => 'nasi', 'pake' => 'sambel', 'enak' => $same_slug);
-		var_dump($makan);
-		die();
+		// $same_slug = $this->db->select('slug')
+		// 	->where('slug', $slug)
+		// 	->count_all_results('blog');
 
-		// if (!empty($same_slug))
-		// {
-
-		// }
+		$array = explode(PHP_EOL, trim($this->input->post('text')));
+		$paragraphs = array();
+		foreach ($array as $paragraph) {
+			$paragraph = rtrim(preg_replace('/\s+/', ' ', $paragraph));
+			if (empty($paragraph)) {
+				continue;
+			}
+			array_push($paragraphs, rtrim($paragraph));
+		}
+		$paragraphs = implode(PHP_EOL, $paragraphs);
 
 		$data = array(
 			'title' => $this->input->post('title'),
 			'slug' => $slug,
-			'text' => $this->input->post('text')
+			'text' => $paragraphs
 		);
 
 		return $this->db->insert('blog', $data);
