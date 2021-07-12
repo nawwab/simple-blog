@@ -10,7 +10,7 @@ class Blog extends CI_Controller
 
 	public function index()
 	{
-		$data['blog'] = $this->blog_model->get_blog();
+		$data['blogs'] = $this->blog_model->get_blog();
 		$view_title = 'Blog Archive';
 
 		$this->load->view('templates/header', array('view_title' => $view_title));
@@ -54,6 +54,40 @@ class Blog extends CI_Controller
 		{
 			$this->blog_model->set_blog();
 			redirect('blog');
+		}
+	}
+
+	public function edit($id)
+	{
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		$this->load->helper('url');
+
+		$this->form_validation->set_rules('title', 'title', 'required');
+		$this->form_validation->set_rules('text', 'text', 'required');
+
+		$view_data = [];
+		$view_title = 'Edit article';
+
+		if (isset($_POST['submit'])) {
+			$view_data['blog'] = array(
+				'id' => $_POST['id'],
+				'slug' => $_POST['slug'],
+				'title' => $_POST['title'] ? $_POST['title'] : "",
+				'text' => $_POST['text'] ? $_POST['text'] : ""
+			);
+		} else {
+			$view_data['blog'] = $this->blog_model->get_blog_by_id($id);
+		}
+
+		if ($this->form_validation->run() === FALSE) {
+			$this->load->view('templates/header', array('view_title' => $view_title));
+			$this->load->view('blog/edit', $view_data);
+			$this->load->view('templates/footer');
+		} else {
+			$this->blog_model->update_blog($_POST['id']);
+			$slug = $this->blog_model->get_blog_by_id($id)['slug'];
+			redirect('blog/' . $slug);
 		}
 	}
 

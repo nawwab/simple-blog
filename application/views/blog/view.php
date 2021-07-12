@@ -10,7 +10,7 @@
 			<a class="btn btn-light" href="<?= site_url('blog/delete/' . $blog_item['slug']) ?>" style="color:currentColor;" onclick="return confirm('Are you sure you want to delete article: <?= $blog_item['title'] ?>?')">
 				<i class="far fa-trash-alt"></i>
 			</a>
-			<a class="btn btn-light" href="<?= site_url('blog/delete/' . $blog_item['slug']) ?>" style="color:currentColor;">
+			<a class="btn btn-light" href="<?= site_url('blog/edit/' . $blog_item['id']) ?>" style="color:currentColor;">
 				<i class="far fa-edit"></i>
 			</a>
 		</div>
